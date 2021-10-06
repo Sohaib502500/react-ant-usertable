@@ -1,6 +1,7 @@
 import {Table} from 'antd';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import { css } from '@emotion/css'
 
 
 export default class TableView extends React.Component{
@@ -19,13 +20,30 @@ export default class TableView extends React.Component{
   
 
   render(){
-    
+    const tableCSS = css({
+      backgroundColor: 'white',
+      '& table': {
+        width:'100%',
+        borderCollapse: '#CCCCCC'
+      },
+      '& thead > tr > th': {
+        height:'30px',
+        backgroundColor: '#CCCCCC',
+        fontSize:'14px',
+        fontWeight:'bold'
+      },
+      '& thead > tr': {
+      }
+    });
+   
+  
     if(this.state.isLoading==true){
       this.fetchData();
       return(<div>Loading Data</div>);
     }
     return(
-      <Table dataSource={this.getDataSource()} columns={this.getColumns()}/>
+      <Table dataSource={this.getDataSource()} columns={this.getColumns()} className={tableCSS}>
+      </Table>
     );
   }
 
@@ -69,25 +87,28 @@ export default class TableView extends React.Component{
     const badgeClass = 'badge m-2 badge-primary';
     const columns = [
       {
+        width: '20px',
         title: '',
         dataIndex: 'isChecked',
-        render: checked => <div style={{display:'flex',width:'20px'}}><input type='checkbox' style={{width:'10px',height:'10px',display:'flex'}}/></div>
+        render: checked => <div style={{display:'flex',maxWidth:'20px'}}><input type='checkbox' style={{width:'10px',height:'10px',align:'center'}}/></div>
       
       },
       {
         title: '',
         dataIndex: 'divider',
-        render: divColor => <img src='' alt='' style={{height:'68px',width:'7px',borderRadius:'25px',backgroundColor:divColor}}/>
+        render: divColor => <img src='' alt='' style={{height:'68px',width:'7px',borderRadius:'25px',backgroundColor:divColor}}/>,
+        width: '10px',
        
       },
       {
         dataIndex: 'imageUrl',
-        render:  theImageURL => <img alt='' src={theImageURL} style={{height:'65px', width:'65px',marginLeft:'3px'}} />
+        render:  theImageURL => <img alt='' src={theImageURL} style={{height:'65px', width:'65px',marginLeft:'3px'}} />,
+        width: '70px',
       },
       {
         title: 'Name',
         dataIndex: 'name',
-        render: name =><span style={{fontSize:'16px',marginLeft:'10px',width:'500px'}}>{name}</span>,
+        render: name =><span style={{fontSize:'16px',marginLeft:'10px',width:'500px',align:'left'}}>{name}</span>,
         key: 'name',
       },
       {
@@ -96,7 +117,7 @@ export default class TableView extends React.Component{
       {
         title: 'Gender',
         dataIndex: 'gender',
-        render: gender => <span className={gender==='female' ?'badge m-2 badge-primary':'badge m-2 badge-warning'} style={{ fontSize: '15px', fontWeight: 'bold',borderRadius:'25px' }}>{gender}</span>,
+        render: gender => <span className={gender==='female' ?'badge m-2 badge-primary':'badge m-2 badge-warning'} style={{ fontSize: '15px', fontWeight: 'bold',borderRadius:'25px'}}>{gender}</span>,
         key: 'gender',
       },
       {
@@ -120,6 +141,7 @@ export default class TableView extends React.Component{
       {
         render: x=> <img src='' alt='' style={{height:'70px',width:'1px',backgroundColor:'#CCCCCC'}}/>,
       },
+      
       {
         render: x=> <img src='' alt='' style={{height:'1px',width:'100%',backgroundColor:'#CCCCCC'}}/>,
       },
