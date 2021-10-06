@@ -89,8 +89,9 @@ export default class TableView extends React.Component{
       {
         width: '20px',
         title: '',
+        align: 'center',
         dataIndex: 'isChecked',
-        render: checked => <div style={{display:'flex',maxWidth:'20px'}}><input type='checkbox' style={{width:'10px',height:'10px',align:'center'}}/></div>
+        render: checked => <input type='checkbox' style={{width:'10px',height:'10px',align:'center'}}/>
       
       },
       {
