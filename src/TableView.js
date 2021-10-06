@@ -42,7 +42,7 @@ export default class TableView extends React.Component{
       return(<div>Loading Data</div>);
     }
     return(
-      <Table dataSource={this.getDataSource()} columns={this.getColumns()} className={tableCSS}>
+      <Table dataSource={this.getDataSource()} columns={this.getColumns()} className={tableCSS} pagination={false} rowClassName={{backgroundColor:'#CCCCCC'}} >
       </Table>
     );
   }
